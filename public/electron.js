@@ -27,21 +27,20 @@ function createWindow() {
         show: false
     })
 
-    if (process.env.NODE_ENV === "development") {
-        const {
-            default: installExtension,
-            REACT_DEVELOPER_TOOLS
-        } = require("electron-devtools-installer")
+    const {
+        default: installExtension,
+        REACT_DEVELOPER_TOOLS
+    } = require("electron-devtools-installer")
 
-        installExtension(REACT_DEVELOPER_TOOLS)
-            .then(name => console.log(`Added Extension:  ${name}`))
-            .catch(err => console.log("An error occurred: ", err))
-    }
+    installExtension(REACT_DEVELOPER_TOOLS)
+        .then(() => {
+            mainWindow.webContents.openDevTools()
+        })
+        .catch(err => console.log("An error occurred: ", err))
 
     mainWindow.loadURL(
         isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`
     )
-    // mainWindow.webContents.openDevTools();
 
     // React DevTools
     // installExtension(REACT_DEVELOPER_TOOLS)
