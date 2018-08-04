@@ -5,7 +5,7 @@
     "description": "App to experiment with an electron stack",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/cbranch101/electron-stack-app"
     },
     "private": true,
     "devDependencies": {
@@ -52,7 +52,7 @@
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "format-all": "prettier-eslint --write \"src/**/*.{jsx,js}\"",
-        "electron-pack": "build --em.main=build/electron.js --mac --win -p always",
+        "electron-pack": "build --em.main=build/electron.js --mac --win -p",
         "win-pack": "build --em.main=build/electron.js --win",
         "check-codesign": "codesign --verify --verbose --deep --strict dist/mac/Scribe.app",
         "preelectron-pack": "npm run build",
@@ -63,24 +63,18 @@
         "postinstall": "install-app-deps"
     },
     "build": {
-        "appId": "com.github.Arieg419.boilerplate",
         "files": [
             "build/**/*",
             "node_modules/**/*",
             "!build-scripts${/*}"
         ],
-        "forceCodeSigning": true,
+        "forceCodeSigning": false,
         "directories": {
             "buildResources": "assets"
         },
         "mac": {
-            "category": "your.app.category.type",
-            "publish": {
-                "provider": "github",
-                "owner": "Arieg419"
-            },
+            "category": "public.app-category.productivity",
             "target": [
-                "zip",
                 "dmg"
             ]
         },
