@@ -6,7 +6,8 @@ import App from "./client/src/App"
 
 const testDatabase = async () => {
     const db = await loadDatabase()
-    const records = await db.find({ foo: "bar" })
+    await db.insert({ foo: "bar" })
+    const records = await db.find({})
     console.log(records)
 }
 
