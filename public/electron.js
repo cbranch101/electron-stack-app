@@ -1,5 +1,5 @@
 const electron = require("electron")
-const { app } = electron
+const { app, ipcMain } = electron
 const { autoUpdater } = require("electron-updater")
 const isDev = require("electron-is-dev")
 const path = require("path")
@@ -25,6 +25,10 @@ function createWindow() {
             webSecurity: false
         },
         show: false
+    })
+
+    ipcMain.on("render-message", (event, arg) => {
+        console.log(arg)
     })
 
     const {

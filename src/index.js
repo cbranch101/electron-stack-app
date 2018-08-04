@@ -12,8 +12,13 @@ const testDatabase = async () => {
 }
 
 ipcRenderer.on("test-message", (event, arg) => {
-    console.log(arg)
+    console.log("in render", arg)
 })
+
+setTimeout(() => {
+    console.log("sending message")
+    ipcRenderer.send("render-message", { render: "message" })
+}, 3000)
 
 testDatabase()
 ReactDOM.render(<App />, document.getElementById("root"))
