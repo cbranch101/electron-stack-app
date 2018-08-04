@@ -6,7 +6,6 @@ const path = require("path")
 require("dotenv").config()
 
 const BrowserWindow = electron.BrowserWindow
-const { default: installExtension, REACT_DEVELOPER_TOOLS } = require("electron-devtools-installer")
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -28,9 +27,16 @@ function createWindow() {
         show: false
     })
 
-    installExtension(REACT_DEVELOPER_TOOLS)
-        .then(name => console.log(`Added Extension:  ${name}`))
-        .catch(err => console.log("An error occurred: ", err))
+    if (process.env.NODE_ENV === "development") {
+        const {
+            default: installExtension,
+            REACT_DEVELOPER_TOOLS
+        } = require("electron-devtools-installer")
+
+        installExtension(REACT_DEVELOPER_TOOLS)
+            .then(name => console.log(`Added Extension:  ${name}`))
+            .catch(err => console.log("An error occurred: ", err))
+    }
 
     mainWindow.loadURL(
         isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`
