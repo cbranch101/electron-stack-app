@@ -1,12 +1,7 @@
-import DataStore from "nedb"
+import DataStore from "nedb-promise"
 
-export const loadDatabase = () => {
-    const promise = new Promise(resolve => {
-        const db = new DataStore("timers")
-        db.loadDatabase(() => {
-            resolve(db)
-        })
-    })
-
-    return promise
+export const loadDatabase = async () => {
+    const db = new DataStore("timers")
+    await db.loadDatabase()
+    return db
 }
