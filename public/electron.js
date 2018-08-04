@@ -49,6 +49,7 @@ function createWindow() {
 
     mainWindow.once("ready-to-show", () => {
         mainWindow.show()
+        mainWindow.webContents.send("test-message", { foo: "bar" })
     })
 
     // Prompt users before window close
