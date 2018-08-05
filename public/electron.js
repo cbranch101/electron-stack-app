@@ -27,6 +27,10 @@ function createWindow() {
         show: false
     })
 
+    // ipcMain.on("render-message", (event, arg) => {
+    //     console.log(arg)
+    // })
+
     const {
         default: installExtension,
         REACT_DEVELOPER_TOOLS
@@ -49,6 +53,9 @@ function createWindow() {
 
     mainWindow.once("ready-to-show", () => {
         mainWindow.show()
+        setTimeout(() => {
+            mainWindow.webContents.send("test-message", "I'm updated")
+        }, 3000)
     })
 
     // Prompt users before window close
