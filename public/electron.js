@@ -1,5 +1,5 @@
 const electron = require("electron")
-const { app, ipcMain } = electron
+const { app } = electron
 const { autoUpdater } = require("electron-updater")
 const isDev = require("electron-is-dev")
 const path = require("path")
@@ -27,9 +27,9 @@ function createWindow() {
         show: false
     })
 
-    ipcMain.on("render-message", (event, arg) => {
-        console.log(arg)
-    })
+    // ipcMain.on("render-message", (event, arg) => {
+    //     console.log(arg)
+    // })
 
     const {
         default: installExtension,
@@ -53,7 +53,9 @@ function createWindow() {
 
     mainWindow.once("ready-to-show", () => {
         mainWindow.show()
-        mainWindow.webContents.send("test-message", { foo: "bar" })
+        setTimeout(() => {
+            mainWindow.webContents.send("test-message", "I'm updated")
+        }, 3000)
     })
 
     // Prompt users before window close
