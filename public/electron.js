@@ -4,6 +4,7 @@ const { autoUpdater } = require("electron-updater")
 const isDev = require("electron-is-dev")
 const path = require("path")
 require("dotenv").config()
+const { testFunction } = require("../src/main/test-file.js")
 
 const BrowserWindow = electron.BrowserWindow
 
@@ -14,7 +15,7 @@ let mainWindow
 function createWindow() {
     // Check for software updates
     autoUpdater.checkForUpdates()
-
+    testFunction().then(val => console.log(val))
     // Create the browser window.
     mainWindow = new BrowserWindow({
         titleBarStyle: "hidden",

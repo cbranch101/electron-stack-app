@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { loadDatabase } from "./client/src/api"
+// import { loadDatabase } from "./api"
 
-import App from "./client/src/App"
+import App from "./App"
 
 // const testDatabase = async () => {
 //     const db = await loadDatabase()
